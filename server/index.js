@@ -1,0 +1,47 @@
+require("dotenv").config();
+const db = require("./models");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+
+//authentication and authorization
+const { loginRequired, ensureCorrectUser } = require("./middleware/auth");
+//error handler
+const errorHandler = require("./handlers/error");
+//private routes - secured
+const userRoutes = require("./routes/user");
+const authRoutes = require("./routes/auth");
+
+//process.env.CORS_ORIGIN;
+//process.env.CORS_METHODS;
+//process.env.CORS_CREDENTIALS;
+
+//port
+const PORT = process.env.PORT || 8081;
+
+app.set("query parser", "simple");
+app.use(bodyParser.json());
+
+//routes
+app.get("/", (req, res, next) => {
+  res.send("Server ok");
+});
+
+//USERS
+app.use("/api/users/:user_id", loginRequired, ensureCorrectUser, userRoutes);
+
+//AUTH
+app.use("/api/auth", authRoutes);
+
+//error handling
+app.use(function (req, res, next) {
+  let err = new Error("Requested route not found");
+  err.status = 404;
+  next(err);
+});
+
+app.use(errorHandler);
+
+app.listen(PORT, function () {
+  console.log(`SERVER STARTED on PORT ${PORT}`);
+});
