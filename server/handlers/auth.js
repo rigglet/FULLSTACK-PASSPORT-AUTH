@@ -1,6 +1,5 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-//const { inspect } = require("util");
 
 exports.signin = async function (req, res, next) {
   try {

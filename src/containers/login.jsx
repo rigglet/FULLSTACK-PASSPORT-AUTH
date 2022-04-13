@@ -1,32 +1,32 @@
 import styled from "styled-components";
-import Register from "../components/register";
-//import Login from "../components/login";
+// import Register from "../components/register";
+import LoginForm from "../components/login";
 import green from "../assets/profile-green.svg";
 import orange from "../assets/profile-orange.svg";
 import purple from "../assets/profile-purple.svg";
 import pattern from "../assets/pattern.svg";
-import { signup } from "../api/api";
+//import { signup } from "../api/api";
 
-const Signup = () => {
-  const handleRegisterUser = () => {};
+const Login = () => {
+  //const handleRegisterUser = () => {};
 
   return (
-    <StyledSignup>
+    <StyledLogin>
       <div className="image-side">
         <div className="profile-image">
           <img src={orange} alt="profile pic" />
         </div>
       </div>
       <div className="form-side">
-        <Register />
+        <LoginForm />
       </div>
-    </StyledSignup>
+    </StyledLogin>
   );
 };
 
-export default Signup;
+export default Login;
 
-const StyledSignup = styled.div`
+const StyledLogin = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

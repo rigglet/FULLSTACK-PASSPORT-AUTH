@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { FaUser } from "react-icons/fa";
-import { SiPassport } from "react-icons/si";
 import { Link } from "react-router-dom";
+//import { FaUser } from "react-icons/fa";
+import { SiPassport } from "react-icons/si";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -15,11 +15,11 @@ const Login = () => {
   };
 
   return (
-    <StyledLogin>
-      <div className="login-container">
+    <StyledRegister>
+      <div className="register-container">
         {/* <FaUser color="#de7721" size="50px" /> */}
         <SiPassport color="#de7721" size="50px" />
-        <h1 className="form-title">Sign in</h1>
+        <h1 className="form-title">Register</h1>
         <form onSubmit={handleSubmit}>
           <div className="input">
             <label htmlFor="username">Username</label>
@@ -42,20 +42,19 @@ const Login = () => {
             />
           </div>
           <div className="buttons">
-            <button className="button-sign">Sign in</button>
-            {/* <button className="button-register">Register</button> */}
+            {/* <button className="button-sign">Sign in</button> */}
+            <button className="button-register">Register</button>
           </div>
-
-          <Link to="/register">Not a user? Register here...</Link>
+          <Link to="/login">Back to Sign in</Link>
         </form>
       </div>
-    </StyledLogin>
+    </StyledRegister>
   );
 };
 
-export default Login;
+export default Register;
 
-const StyledLogin = styled.div`
+const StyledRegister = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,7 +63,7 @@ const StyledLogin = styled.div`
   width: 100%;
   height: 100%;
 
-  .login-container {
+  .register-container {
     background: whitesmoke;
     display: flex;
     flex-direction: column;
