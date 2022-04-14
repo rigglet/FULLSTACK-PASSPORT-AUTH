@@ -7,9 +7,7 @@ import purple from "../assets/profile-purple.svg";
 import pattern from "../assets/pattern.svg";
 import { signup } from "../api/api";
 
-const Signup = () => {
-  const handleRegisterUser = () => {};
-
+const Signup = ({ setAuth }) => {
   return (
     <StyledSignup>
       <div className="image-side">
@@ -18,7 +16,7 @@ const Signup = () => {
         </div>
       </div>
       <div className="form-side">
-        <Register />
+        <Register setAuth={setAuth} />
       </div>
     </StyledSignup>
   );

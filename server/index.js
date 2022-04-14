@@ -4,6 +4,21 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const cors = require("cors");
+const morgan = require("morgan");
+
+//cors
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    //origin: "http://localhost:3000",
+    methods: ["POST", "GET", "PUT", "UPDATE", "DELETE", "OPTIONS"],
+    credentials: process.env.CORS_CREDENTIALS,
+  })
+);
+
+//morgan - logging
+app.use(morgan("dev"));
 
 //authentication and authorization
 const { loginRequired, ensureCorrectUser } = require("./middleware/auth");
@@ -57,10 +72,11 @@ app.get("/", (req, res, next) => {
 // });
 
 //USERS
-app.use("/api/users/:user_id", loginRequired, ensureCorrectUser, userRoutes);
+//app.use("/api/users/:user_id", loginRequired, ensureCorrectUser, userRoutes);
+app.use("/api/users", userRoutes);
 
 //AUTH
-app.use("/api/auth", authRoutes);
+//app.use("/api/auth", authRoutes);
 
 //error handling
 app.use(function (req, res, next) {

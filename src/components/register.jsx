@@ -1,21 +1,92 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 //import { FaUser } from "react-icons/fa";
 import { SiPassport } from "react-icons/si";
+//message components
+import { ToastContainer, toast, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Register = () => {
+import { register } from "../api/api";
+
+const Register = ({ setAuth }) => {
+  const navigate = useNavigate();
+  //console.log(setAuth);
+
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const notify = (type) => {
+    switch (type) {
+      case "MISSING":
+        toast.warn("Please enter a username and password", { color: "black" });
+        break;
+      case "INVALID":
+        toast.error("Please check username and password are correct", {
+          color: "black",
+        });
+        break;
+      default:
+        toast.dark("Nothing to report");
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`${username} ${password}`);
+    setLoading(true);
+    //toggleEmail(false);
+    //togglePassword(false);
+
+    if (email.length > 0 && password.length > 0 && username.length > 0) {
+      const data = { email, username, password };
+      const res = await register(data);
+
+      if (res.status === 200) {
+        setAuth({
+          id: res.data.id,
+          username: res.data.username,
+          token: res.data.token,
+          profileImageUrl: res.data.profileImageUrl,
+          email: res.data.email,
+        });
+
+        //reset fields
+        setUsername("");
+        setPassword("");
+        setEmail("");
+
+        //redirect
+        navigate("/loggedIn");
+      } else {
+        //toast message - invalid credentials
+        notify("INVALID", res.error);
+        setLoading(false);
+      }
+    } else {
+      //toast message - missing credentials
+      notify("MISSING");
+      setLoading(false);
+    }
   };
 
   return (
     <StyledRegister>
+      <ToastContainer
+        closeButton={false}
+        transition={Zoom}
+        position="bottom-center"
+        draggable={false}
+        pauseOnHover
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+      />
       <div className="register-container">
         {/* <FaUser color="#de7721" size="50px" /> */}
         <SiPassport color="#de7721" size="50px" />
@@ -29,6 +100,16 @@ const Register = () => {
               autoComplete="none"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              autoComplete="false"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="input">
@@ -80,7 +161,7 @@ const StyledRegister = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3rem;
+      gap: 1.5rem;
       padding: 1rem;
       height: auto;
       flex: 1 1 250px;
@@ -99,6 +180,7 @@ const StyledRegister = styled.div`
         text-transform: uppercase;
       }
       input[type="text"],
+      input[type="email"],
       input[type="password"] {
         font-size: 1.5rem;
         font-weight: bold;

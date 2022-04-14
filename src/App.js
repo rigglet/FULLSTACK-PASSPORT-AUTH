@@ -28,7 +28,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Login setAuth={setAuth} />} />
-          <Route exact path="/login" element={<Login setAuth={setAuth} />} />
+          <Route
+            exact
+            path="/login"
+            element={<Login setAuth={setAuth} />}
+          ></Route>
           <Route
             exact
             path="/register"

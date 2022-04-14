@@ -16,10 +16,11 @@ export const signin = async (data) => {
   }
 };
 
-export const signup = async (data) => {
+export const register = async (data) => {
   try {
+    console.log(`${serverBaseURL()}/api/users/signup`);
     const response = await axios.post(
-      `${serverBaseURL()}/api/auth/signup`,
+      `${serverBaseURL()}/api/users/signup`,
       data
     );
     if (response.status === 200) {
