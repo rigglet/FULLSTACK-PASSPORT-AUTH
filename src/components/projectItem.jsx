@@ -10,7 +10,7 @@ const ProjectItem = ({ project, handleItemDelete }) => {
         //color="#313131"
         size="25px"
         className="icon"
-        onClick={(e) => handleItemDelete}
+        onClick={() => handleItemDelete(project._id)}
       />
     </StyledProjectItem>
   );

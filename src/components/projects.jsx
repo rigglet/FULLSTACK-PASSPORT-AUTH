@@ -6,7 +6,9 @@ const Projects = ({ projects, handleItemDelete, handleItemAdd }) => {
     <StyledProjects className="project-container">
       <h1>Projects</h1>
       <div className="button-container">
-        <button className="button button-new">New...</button>
+        <button className="button button-new" onClick={() => handleItemAdd()}>
+          New...
+        </button>
       </div>
       <div className="project-list">
         {projects.map((p) => {

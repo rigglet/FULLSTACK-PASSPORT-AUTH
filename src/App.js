@@ -7,7 +7,7 @@ import Signup from "./containers/signup";
 import Login from "./containers/login";
 import Admin from "./containers/admin";
 //api data
-import { getProjects } from "./api/api";
+import { getProjects, deleteProject, addProject } from "./api/api";
 
 function App() {
   const [auth, setAuth] = useState({});
@@ -16,21 +16,28 @@ function App() {
   //get projects data
   useEffect(() => {
     getProjects().then((results) => {
-      console.log(results);
       if (results.status === 200) {
         setProjects(results.data);
       }
     });
   }, []);
 
+  console.log(projects);
+
   //DELETE ITEM
-  const handleItemDelete = (e) => {
-    console.log(e);
+  const handleItemDelete = (id) => {
+    deleteProject(id).then((results) => {
+      if (results.status === 200) {
+        setProjects(projects.filter((project) => project._id !== id));
+      }
+    });
+    console.log(id);
   };
 
   //ADD ITEM
-  const handleItemAdd = (e) => {
-    console.log(e);
+  const handleItemAdd = () => {
+    //console.log(e);
+    console.log("ADD");
   };
 
   //const Navigate = useNavigate();
