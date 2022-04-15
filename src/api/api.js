@@ -63,7 +63,7 @@ export const deleteProject = async (delete_id) => {
 //Add project
 export const addProject = async (data) => {
   try {
-    const response = await axios.post(`${serverBaseURL()}/api/projects`, data);
+    const response = await axios.post(`${serverBaseURL()}/api/projects/`, data);
 
     if (response.status === 200) {
       return response;

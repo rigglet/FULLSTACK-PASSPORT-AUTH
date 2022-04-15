@@ -2,9 +2,9 @@ const db = require("../models");
 
 exports.createProject = async function (req, res, next) {
   try {
-    if (!req.isAuthenticated()) {
-      throw new Error({ message: "You must be signed in" });
-    }
+    // if (!req.isAuthenticated()) {
+    //   throw new Error({ message: "You must be signed in" });
+    // }
 
     console.log("Creating project...");
 

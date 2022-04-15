@@ -31,13 +31,19 @@ function App() {
         setProjects(projects.filter((project) => project._id !== id));
       }
     });
-    console.log(id);
   };
 
   //ADD ITEM
   const handleItemAdd = () => {
-    //console.log(e);
-    console.log("ADD");
+    const newProject = {
+      projectName: "New project",
+      shortDescription: "A fancy new project",
+    };
+    addProject(newProject).then((results) => {
+      if (results.status === 200) {
+        setProjects([...projects, results.data]);
+      }
+    });
   };
 
   //const Navigate = useNavigate();
