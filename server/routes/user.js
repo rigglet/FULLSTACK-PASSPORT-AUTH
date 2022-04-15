@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
+const passport = require("passport");
 
 const {
   getUser,
@@ -20,7 +21,15 @@ const {
 //   .put(updateUser)
 //   .delete(deleteUser);
 
-router.route("/signup").post(signup);
-router.route("/signin").post(signin);
+router.get(getUsers);
+router.post("/signup", signup);
+router.post(
+  "/signin",
+  passport.authenticate("local", {
+    failureRedirect: "/notfound",
+    failureMessage: true,
+  }),
+  signin
+);
 
 module.exports = router;

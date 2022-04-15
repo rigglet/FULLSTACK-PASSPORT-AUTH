@@ -1,19 +1,16 @@
 import styled from "styled-components";
 import Register from "../components/register";
-//import Login from "../components/login";
-import green from "../assets/profile-green.svg";
-import orange from "../assets/profile-orange.svg";
-import purple from "../assets/profile-purple.svg";
-import pattern from "../assets/pattern.svg";
-import { signup } from "../api/api";
+import Projects from "../components/projects";
 
-const Signup = ({ setAuth }) => {
+const Signup = ({ setAuth, projects, handleItemAdd, handleItemDelete }) => {
   return (
     <StyledSignup>
       <div className="image-side">
-        <div className="profile-image">
-          <img src={orange} alt="profile pic" />
-        </div>
+        <Projects
+          projects={projects}
+          handleItemAdd={handleItemAdd}
+          handleItemDelete={handleItemDelete}
+        />
       </div>
       <div className="form-side">
         <Register setAuth={setAuth} />
@@ -30,32 +27,4 @@ const StyledSignup = styled.div`
   justify-content: center;
   width: 100vw;
   height: 100vh;
-
-  .form-side {
-    width: 50%;
-    height: 100%;
-    background-image: url(${pattern});
-  }
-  .image-side {
-    background: linear-gradient(#7621de, #9e70d5);
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .profile-image {
-      aspect-ratio: 1;
-      width: 30%;
-      border-radius: 50%;
-      background: whitesmoke;
-      img {
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-      }
-    }
-  }
 `;

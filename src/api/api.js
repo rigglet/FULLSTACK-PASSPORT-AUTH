@@ -5,9 +5,10 @@ import { baseURL as serverBaseURL } from "../config/config";
 export const signin = async (data) => {
   try {
     const response = await axios.post(
-      `${serverBaseURL()}/api/auth/signin`,
+      `${serverBaseURL()}/api/users/signin`,
       data
     );
+
     if (response.status === 200) {
       return response;
     }
@@ -18,11 +19,24 @@ export const signin = async (data) => {
 
 export const register = async (data) => {
   try {
-    console.log(`${serverBaseURL()}/api/users/signup`);
     const response = await axios.post(
       `${serverBaseURL()}/api/users/signup`,
       data
     );
+    if (response.status === 200) {
+      return response;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getProjects = async () => {
+  //const { id, token } = auth;
+
+  try {
+    const response = await axios.get(`${serverBaseURL()}/api/projects`);
+
     if (response.status === 200) {
       return response;
     }
@@ -86,27 +100,27 @@ export const getUserData = async (auth) => {
   }
 };
 
-export const getData = async (auth, datatype) => {
-  const { id, token } = auth;
+// export const getData = async (auth, datatype) => {
+//   const { id, token } = auth;
 
-  try {
-    //axios.headers.Authorization = { bearer: token };
-    const response = await axios.get(
-      `${serverBaseURL()}/api/users/${id}/${datatype}`,
-      {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      }
-    );
+//   try {
+//     //axios.headers.Authorization = { bearer: token };
+//     const response = await axios.get(
+//       `${serverBaseURL()}/api/users/${id}/${datatype}`,
+//       {
+//         headers: {
+//           Authorization: `bearer ${token}`,
+//         },
+//       }
+//     );
 
-    if (response.status === 200) {
-      return response;
-    }
-  } catch (error) {
-    return error;
-  }
-};
+//     if (response.status === 200) {
+//       return response;
+//     }
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 export const updateData = async (auth, datatype, data) => {
   const { id, token } = auth;

@@ -49,8 +49,16 @@ exports.updateUser = async function (req, res, next) {
 
 exports.signin = async function (req, res, next) {
   try {
-    res.send(`Signin`);
-  } catch (error) {
+    const { username, password } = req.body;
+    // console.log(username, password);
+    console.log(`Logged in user`);
+
+    return res.status(200).json({
+      username,
+      password,
+    });
+    //return res.status(200).json({ ok: "ok" });
+  } catch (err) {
     return next(err);
   }
 };

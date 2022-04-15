@@ -1,11 +1,38 @@
-import { useState } from "react";
+//react
+import { useState, useEffect } from "react";
+//routing
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+//containers
 import Signup from "./containers/signup";
 import Login from "./containers/login";
-import LoggedIn from "./containers/loggedIn";
+import Admin from "./containers/admin";
+//api data
+import { getProjects } from "./api/api";
 
 function App() {
   const [auth, setAuth] = useState({});
+  const [projects, setProjects] = useState([]);
+
+  //get projects data
+  useEffect(() => {
+    getProjects().then((results) => {
+      console.log(results);
+      if (results.status === 200) {
+        setProjects(results.data);
+      }
+    });
+  }, []);
+
+  //DELETE ITEM
+  const handleItemDelete = (e) => {
+    console.log(e);
+  };
+
+  //ADD ITEM
+  const handleItemAdd = (e) => {
+    console.log(e);
+  };
+
   //const Navigate = useNavigate();
 
   // A wrapper for <Route> that redirects to the login
@@ -27,31 +54,67 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login setAuth={setAuth} />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <Login
+                setAuth={setAuth}
+                projects={projects}
+                setProjects={setProjects}
+                handleItemDelete={handleItemDelete}
+                handleItemAdd={handleItemAdd}
+              />
+            }
+          />
           <Route
             exact
             path="/login"
-            element={<Login setAuth={setAuth} />}
+            element={
+              <Login
+                setAuth={setAuth}
+                projects={projects}
+                setProjects={setProjects}
+                handleItemDelete={handleItemDelete}
+                handleItemAdd={handleItemAdd}
+              />
+            }
           ></Route>
           <Route
             exact
             path="/register"
-            element={<Signup setAuth={setAuth} />}
+            element={
+              <Signup
+                auth={auth}
+                setAuth={setAuth}
+                projects={projects}
+                setProjects={setProjects}
+                handleItemDelete={handleItemDelete}
+                handleItemAdd={handleItemAdd}
+              />
+            }
           />
 
-          {/* <PrivateRoute path="/loggedIn">
-            <LoggedIn auth={auth} setAuth={setAuth} />
+          {/* <PrivateRoute path="/admin">
+            Admin auth={auth} setAuth={setAuth} />
           </PrivateRoute> */}
           {/* <Route
             exact
             path="/loggedin"
-            element={<LoggedIn setAuth={setAuth} />}
+            element={<Admin setAuth={setAuth} />}
           /> */}
           <Route
-            path="/loggedIn"
+            path="/admin"
             element={
               <PrivateRoute>
-                <LoggedIn auth={auth} setAuth={setAuth} />
+                <Admin
+                  auth={auth}
+                  setAuth={setAuth}
+                  projects={projects}
+                  setProjects={setProjects}
+                  handleItemDelete={handleItemDelete}
+                  handleItemAdd={handleItemAdd}
+                />
               </PrivateRoute>
             }
           />

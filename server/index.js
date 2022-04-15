@@ -31,6 +31,7 @@ const errorHandler = require("./handlers/error");
 //private routes - secured
 const userRoutes = require("./routes/user");
 const authRoutes = require("./routes/auth");
+const projectRoutes = require("./routes/project");
 
 //process.env.CORS_ORIGIN;
 //process.env.CORS_METHODS;
@@ -73,7 +74,15 @@ app.get("/", (req, res, next) => {
 
 //USERS
 //app.use("/api/users/:user_id", loginRequired, ensureCorrectUser, userRoutes);
+app.use("/api/projects", projectRoutes);
 app.use("/api/users", userRoutes);
+
+app.get("/notfound", (req, res, next) => {
+  //res.status(400).json({ Error: "Check username and passord" });
+  res.status(400).send("Check username and password");
+  //res.send("blah");
+  //next(err);
+});
 
 //AUTH
 //app.use("/api/auth", authRoutes);

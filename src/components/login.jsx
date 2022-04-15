@@ -1,21 +1,84 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { FaUser } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import { SiPassport } from "react-icons/si";
-import { Link } from "react-router-dom";
+//message components
+import { ToastContainer, toast, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+//REST api call
+import { signin } from "../api/api";
 
-const Login = () => {
+const Login = ({ setAuth }) => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const notify = (type) => {
+    switch (type) {
+      case "MISSING":
+        toast.warn("Please enter a username and password", { color: "black" });
+        break;
+      case "INVALID":
+        toast.error("Please check username and password are correct", {
+          color: "black",
+        });
+        break;
+      default:
+        toast.dark("Nothing to report");
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`${username} ${password}`);
+    setLoading(true);
+
+    if (password.length > 0 && username.length > 0) {
+      const data = { username, password };
+      const res = await signin(data);
+
+      console.log(res);
+      if (res.status === 200) {
+        setAuth(() => ({
+          username: res.data.username,
+          email: res.data.email,
+        }));
+        //token: res.data.token,
+
+        //reset fields
+        setUsername("");
+        setPassword("");
+
+        //redirect
+        navigate("/admin");
+      } else {
+        //toast message - invalid credentials
+        notify("INVALID", res.error);
+        setLoading(false);
+      }
+    } else {
+      //toast message - missing credentials
+      notify("MISSING");
+      setLoading(false);
+    }
   };
 
   return (
     <StyledLogin>
+      <ToastContainer
+        closeButton={false}
+        transition={Zoom}
+        position="bottom-center"
+        draggable={false}
+        pauseOnHover
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+      />
       <div className="login-container">
         {/* <FaUser color="#de7721" size="50px" /> */}
         <SiPassport color="#de7721" size="50px" />
