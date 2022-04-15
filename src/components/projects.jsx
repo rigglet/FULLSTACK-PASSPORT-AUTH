@@ -5,8 +5,8 @@ const Projects = ({ projects, handleItemDelete, handleItemAdd }) => {
   return (
     <StyledProjects className="project-container">
       <h1>Projects</h1>
-      <div className="buttons">
-        <button className="button-new">New...</button>
+      <div className="button-container">
+        <button className="button button-new">New...</button>
       </div>
       <div className="project-list">
         {projects.map((p) => {

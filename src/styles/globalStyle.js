@@ -52,63 +52,41 @@ body{
 }
 
 //BUTTONS
-.buttons{
+.button-container{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 
-    .button-sign, .button-register{
+    .button{
         font-size: 1.5rem;
-        padding: 0.75rem;
-        border: 0;
-        outline: 3px solid #de7721;
-        color: #de7721;
         font-weight: bold;
         border-radius: 4px;
         transition: 0.3s ease;
-    }
-    .button-sign:hover, .button-register:hover {
-        color: whitesmoke;
-        font-weight: bold;
-        border-radius: 4px;
-        background: #da9e6c;
-        box-shadow: 0 3px 3px 3px #7c7c7c;
-    }
-      
-    .button-logout {
-        font-size: 1.5rem;
         padding: 0.75rem;
         border: 0;
+    }
+
+    //Register and new project buttons
+    .button-register, .button-new {
         outline: 3px solid #de7721;
         color: #de7721;
-        font-weight: bold;
-        border-radius: 4px;
-        transition: 0.3s ease;
     }
-    .button-logout:hover {
+    .button-register:hover, .button-new:hover {
         color: whitesmoke;
-        font-weight: bold;
-        border-radius: 4px;
         background: #da9e6c;
         box-shadow: 0 3px 3px 3px #7c7c7c;
     }
 
-    .button-new{
-        font-size: 1.5rem;
-        padding: 0.75rem;
-        border: 0;
+    //signin button
+    .button-signin {
         outline: 3px solid #de7721;
-        color: #de7721;
-        font-weight: bold;
-        border-radius: 4px;
-        transition: 0.3s ease;
-        }
-    .button-new:hover {
+        background: #de7721;
         color: whitesmoke;
-        font-weight: bold;
-        border-radius: 4px;
-        background: #da9e6c;
+    }
+    .button-signin:hover {
+        color: #de7721;
+        background: whitesmoke;
         box-shadow: 0 3px 3px 3px #7c7c7c;
     }
 }

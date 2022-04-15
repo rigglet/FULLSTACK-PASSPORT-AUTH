@@ -21,7 +21,6 @@ const Admin = ({ projects, handleItemAdd, handleItemDelete }) => {
         <div className="logout-container">
           <h1>Logged in!</h1>
           <Link to="/login">Logout</Link>
-          {/* <button className="button-logout">Logout</button> */}
         </div>
       </div>
     </StyledAdmin>
@@ -52,7 +51,7 @@ const StyledAdmin = styled.div`
       width: 50%;
       border-radius: 50%;
       background: whitesmoke;
-    border: 6px solid #7721de;
+      border: 6px solid #7721de;
       img {
         padding: 0;
         width: 100%;
@@ -72,25 +71,8 @@ const StyledAdmin = styled.div`
     border-radius: 20px;
     box-shadow: 0 0 10px black;
     gap: 2rem;
-    /* .button-logout {
-      font-size: 1.5rem;
-      padding: 0.75rem;
-      border: 0;
-      outline: 3px solid #de7721;
-      color: #de7721;
-      font-weight: bold;
-      border-radius: 4px;
-      transition: 0.3s ease;
-    }
-    .button-logout:hover {
-      color: whitesmoke;
-      font-weight: bold;
-      border-radius: 4px;
-      background: #da9e6c;
-      box-shadow: 0 3px 3px 3px #7c7c7c;
-    } */
   }
-  
+
   .image-side {
     background: linear-gradient(#7621de, #9e70d5);
     width: 50%;
@@ -99,39 +81,5 @@ const StyledAdmin = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    .project-container {
-      //aspect-ratio: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 1rem;
-      width: 90%;
-      height: 90%;
-      padding 1rem;
-      border-radius: 4px;
-      background: whitesmoke;
-      /* .project-buttons{
-        .button-sign{
-          font-size: 1.5rem;
-        padding: 0.75rem;
-        border: 0;
-        outline: 3px solid #de7721;
-        color: #de7721;
-        font-weight: bold;
-        border-radius: 4px;
-        transition: 0.3s ease;
-        }
-        .button-sign:hover {
-        color: whitesmoke;
-        font-weight: bold;
-        border-radius: 4px;
-        background: #da9e6c;
-        box-shadow: 0 3px 3px 3px #7c7c7c;
-      }
-      } */
-      
-    }
   }
 `;

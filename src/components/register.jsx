@@ -112,9 +112,9 @@ const Register = ({ setAuth }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="buttons">
+          <div className="button-container">
             {/* <button className="button-sign">Sign in</button> */}
-            <button className="button-register">Register</button>
+            <button className="button button-register">Register</button>
           </div>
           <Link to="/login">Back to Sign in</Link>
         </form>

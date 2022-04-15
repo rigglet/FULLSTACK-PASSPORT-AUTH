@@ -104,9 +104,8 @@ const Login = ({ setAuth }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="buttons">
-            <button className="button-sign">Sign in</button>
-            {/* <button className="button-register">Register</button> */}
+          <div className="button-container">
+            <button className="button button-signin">Sign in</button>
           </div>
 
           <Link to="/register">Not a user? Register here...</Link>
@@ -173,49 +172,6 @@ const StyledLogin = styled.div`
         border: 3px solid #de7721;
         //size: 50;
         color: #313131;
-      }
-      .buttons {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-
-        .button-register {
-          font-size: 1.5rem;
-          padding: 0.75rem;
-          border: 0;
-          outline: 3px solid #de7721;
-          color: #de7721;
-          font-weight: bold;
-          border-radius: 4px;
-          transition: 0.3s ease;
-        }
-        .button-register:hover {
-          color: whitesmoke;
-          font-weight: bold;
-          border-radius: 4px;
-          background: #da9e6c;
-          box-shadow: 0 3px 3px 3px #7c7c7c;
-        }
-        .button-sign {
-          font-size: 1.5rem;
-          padding: 0.75rem;
-          border: 0;
-          outline: 3px solid #de7721;
-          background: #de7721;
-          color: whitesmoke;
-          font-weight: bold;
-          border-radius: 4px;
-          transition: 0.3s ease;
-        }
-        .button-sign:hover {
-          color: whitesmoke;
-          font-weight: bold;
-          border-radius: 4px;
-          color: #de7721;
-          background: whitesmoke;
-          box-shadow: 0 3px 3px 3px #7c7c7c;
-        }
       }
     }
   }
